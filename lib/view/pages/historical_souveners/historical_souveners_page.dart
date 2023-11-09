@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dalel_admin/core/constant/app_colors.dart';
+import 'package:dalel_admin/core/router/app_router.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -13,7 +14,9 @@ class HistoricalSouvenirsPage extends StatelessWidget {
         title: const Text("Historical Souvenirs"),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          context.router.push(const AddSouvenirsRoute());
+        },
         child: Icon(
           Icons.add,
           color: AppColors.offWhite,
