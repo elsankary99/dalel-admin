@@ -15,6 +15,24 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    AddCharacterRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AddCharacterPage(),
+      );
+    },
+    AddPeriodsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AddPeriodsPage(),
+      );
+    },
+    AddSouvenirsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AddSouvenirsPage(),
+      );
+    },
     HistoricalCharactersRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -46,6 +64,48 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [AddCharacterPage]
+class AddCharacterRoute extends PageRouteInfo<void> {
+  const AddCharacterRoute({List<PageRouteInfo>? children})
+      : super(
+          AddCharacterRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AddCharacterRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AddPeriodsPage]
+class AddPeriodsRoute extends PageRouteInfo<void> {
+  const AddPeriodsRoute({List<PageRouteInfo>? children})
+      : super(
+          AddPeriodsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AddPeriodsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AddSouvenirsPage]
+class AddSouvenirsRoute extends PageRouteInfo<void> {
+  const AddSouvenirsRoute({List<PageRouteInfo>? children})
+      : super(
+          AddSouvenirsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AddSouvenirsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

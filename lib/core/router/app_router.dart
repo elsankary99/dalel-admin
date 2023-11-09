@@ -1,5 +1,8 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:dalel_admin/view/pages/add_characters/add_characters_page.dart';
+import 'package:dalel_admin/view/pages/add_peirods/add_periods_page.dart';
+import 'package:dalel_admin/view/pages/add_souveners/add_souvenirs_page.dart';
 import 'package:dalel_admin/view/pages/historical_characters/historical_characters_page.dart';
 import 'package:dalel_admin/view/pages/historical_peirods/historical_peirods_page.dart';
 import 'package:dalel_admin/view/pages/historical_souveners/historical_souveners_page.dart';
@@ -16,8 +19,13 @@ class AppRouter extends _$AppRouter {
   List<AutoRoute> get routes => [
         AutoRoute(page: SplashRoute.page, initial: true),
         AutoRoute(page: HomeRoute.page),
+        //? Historical
         AutoRoute(page: HistoricalCharactersRoute.page),
         AutoRoute(page: HistoricalPeriodsRoute.page),
-        AutoRoute(page: HistoricalSouvenirsRoute.page)
+        AutoRoute(page: HistoricalSouvenirsRoute.page),
+        //? Add
+        AutoRoute(page: AddSouvenirsRoute.page),
+        AutoRoute(page: AddCharacterRoute.page),
+        AutoRoute(page: AddPeriodsRoute.page)
       ];
 }

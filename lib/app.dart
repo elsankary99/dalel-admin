@@ -15,9 +15,12 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: AppColors.offWhite,
           appBarTheme: AppBarTheme(
               centerTitle: true,
+              iconTheme: IconThemeData(color: AppColors.brown),
               backgroundColor: Colors.transparent,
               elevation: 0,
-              titleTextStyle: AppTextStyle.poppins400style20)),
+              titleTextStyle: AppTextStyle.poppins400style20),
+          floatingActionButtonTheme:
+              FloatingActionButtonThemeData(backgroundColor: AppColors.brown)),
     );
   }
 }
