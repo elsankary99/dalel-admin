@@ -1,15 +1,33 @@
+import 'package:dalel_admin/core/widget/custom_circle_indicator.dart';
+import 'package:dalel_admin/core/widget/custom_toast.dart';
+import 'package:dalel_admin/provider/get_image_provider/get_image_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dalel_admin/core/constant/app_colors.dart';
 import 'package:dalel_admin/core/extension/media_query.dart';
 import 'package:flutter/material.dart';
 
-class GetImageCard extends StatelessWidget {
+class GetImageCard extends ConsumerWidget {
   const GetImageCard({
     super.key,
     this.onTap,
   });
   final void Function()? onTap;
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(getImageProvider);
+    final provider = ref.read(getImageProvider.notifier);
+    ref.listen(
+      getImageProvider,
+      (previous, next) {
+        if (next is GetImageSuccess) {
+          customToast(title: "Image Uploaded Successfully");
+        }
+        if (next is GetImageError) {
+          customToast(title: next.message, color: Colors.red);
+        }
+      },
+    );
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
       child: InkWell(
@@ -20,13 +38,19 @@ class GetImageCard extends StatelessWidget {
             border: Border.all(color: AppColors.brown),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Center(
-            child: Icon(
-              Icons.camera_alt_outlined,
-              color: AppColors.brown,
-              size: 34,
-            ),
-          ),
+          child: state is GetImageLoading
+              ? CustomCircleIndicator(
+                  color: AppColors.brown,
+                )
+              : provider.file == null
+                  ? Center(
+                      child: Icon(
+                        Icons.camera_alt_outlined,
+                        color: AppColors.brown,
+                        size: 34,
+                      ),
+                    )
+                  : Image.file(provider.file!),
         ),
       ),
     );

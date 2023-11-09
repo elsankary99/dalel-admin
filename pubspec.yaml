@@ -36,6 +36,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.4.5
+  fluttertoast: ^8.2.3
   image_picker: ^1.0.4
   path: ^1.8.3
 

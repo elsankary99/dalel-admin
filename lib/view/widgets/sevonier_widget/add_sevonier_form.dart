@@ -1,8 +1,8 @@
 import 'package:dalel_admin/core/widget/custom_txt_form.dart';
 import 'package:flutter/material.dart';
 
-class AddPeriodsForm extends StatelessWidget {
-  const AddPeriodsForm({
+class AddSouvenirForm extends StatelessWidget {
+  const AddSouvenirForm({
     super.key,
   });
 
