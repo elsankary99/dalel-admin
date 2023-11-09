@@ -4,7 +4,7 @@ import 'package:dalel_admin/view/pages/historical_characters/historical_characte
 import 'package:dalel_admin/view/pages/historical_peirods/historical_peirods_page.dart';
 import 'package:dalel_admin/view/pages/historical_souveners/historical_souveners_page.dart';
 import 'package:dalel_admin/view/pages/home/home_page.dart';
-import 'package:dalel_admin/view/splash/splash_page.dart';
+import 'package:dalel_admin/view/pages/splash/splash_page.dart';
 
 part 'app_router.gr.dart';
 
