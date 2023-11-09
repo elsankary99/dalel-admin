@@ -8,6 +8,8 @@ import 'package:dalel_admin/view/splash/splash_page.dart';
 
 part 'app_router.gr.dart';
 
+final router = AppRouter();
+
 @AutoRouterConfig()
 class AppRouter extends _$AppRouter {
   @override
