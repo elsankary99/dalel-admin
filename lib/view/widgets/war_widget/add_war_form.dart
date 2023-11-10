@@ -1,6 +1,6 @@
+import 'package:dalel_admin/provider/add_war_provider/add_war_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dalel_admin/core/widget/custom_txt_form.dart';
-import 'package:dalel_admin/provider/periods_provider/periods_provider.dart';
 import 'package:flutter/material.dart';
 
 class AddWarForm extends ConsumerWidget {
@@ -10,7 +10,7 @@ class AddWarForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.read(periodsProvider.notifier);
+    final provider = ref.read(addWarProvider.notifier);
 
     return Form(
       key: provider.formKey,

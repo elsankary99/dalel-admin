@@ -7,9 +7,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 part 'add_war_state.dart';
 
+final docIdProvider = StateProvider<String>((ref) => "");
 final getWarProvider = FutureProvider<List<HistoricalModel>>((ref) async {
-  final response =
-      await FirebaseFirestore.instance.collection("HistoricalPeriods").get();
+  final docId = ref.watch(docIdProvider);
+  final response = await FirebaseFirestore.instance
+      .collection("HistoricalPeriods")
+      .doc(docId)
+      .collection("War")
+      .get();
   final data = response.docs;
   return data.map((e) => HistoricalModel.fromJson(e.id, e.data())).toList();
 });
@@ -23,9 +28,10 @@ class AddWarProvider extends StateNotifier<AddWarState> {
   String? imageUrl;
   String? name;
   String? description;
+  String? docId;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  Future<void> addHistoricalPeriods() async {
+  Future<void> addWar() async {
     try {
       state = AddWarLoading();
       if (formKey.currentState!.validate() && imageUrl != null) {
@@ -34,7 +40,12 @@ class AddWarProvider extends StateNotifier<AddWarState> {
         log(imageUrl!);
         log(name!);
         log(description!);
-        await firestore.collection("HistoricalPeriods").add(
+        log(docId!);
+        await firestore
+            .collection("HistoricalPeriods")
+            .doc(docId)
+            .collection("War")
+            .add(
           {
             "image_url": imageUrl,
             "name": name,

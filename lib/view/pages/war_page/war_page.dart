@@ -1,7 +1,7 @@
 import 'package:dalel_admin/core/constant/app_text_style.dart';
 import 'package:dalel_admin/core/widget/custom_circle_indicator.dart';
 import 'package:dalel_admin/data/model/historical_model.dart';
-import 'package:dalel_admin/provider/periods_provider/periods_provider.dart';
+import 'package:dalel_admin/provider/add_war_provider/add_war_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:dalel_admin/core/constant/app_colors.dart';
@@ -31,18 +31,23 @@ class WarPage extends ConsumerWidget {
         ),
       ),
       body: Center(
-        child: ref.watch(getPeriodsProvider).when(
-              data: (data) => ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: data.length,
-                itemBuilder: (context, index) => CardWithImage(
-                    onTap: () {
-                      context.router.push(AddWarRoute(data: data[index]));
-                    },
-                    description: data[index].description!,
-                    imageUrl: data[index].imageUrl!,
-                    name: data[index].name!),
-              ),
+        child: ref.watch(getWarProvider).when(
+              data: (data) => data.isNotEmpty
+                  ? ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: data.length,
+                      itemBuilder: (context, index) => CardWithImage(
+                          onTap: () {
+                            context.router.push(AddWarRoute(data: data[index]));
+                          },
+                          description: data[index].description!,
+                          imageUrl: data[index].imageUrl!,
+                          name: data[index].name!),
+                    )
+                  : Text(
+                      "Start Add War ",
+                      style: AppTextStyle.poppins500style16,
+                    ),
               error: (error, _) => Text(
                 error.toString(),
                 style:

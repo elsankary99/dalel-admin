@@ -2,8 +2,8 @@ import 'package:dalel_admin/core/constant/app_colors.dart';
 import 'package:dalel_admin/core/widget/custom_circle_indicator.dart';
 import 'package:dalel_admin/core/widget/custom_toast.dart';
 import 'package:dalel_admin/data/model/historical_model.dart';
+import 'package:dalel_admin/provider/add_war_provider/add_war_provider.dart';
 import 'package:dalel_admin/provider/get_image_provider/get_image_provider.dart';
-import 'package:dalel_admin/provider/periods_provider/periods_provider.dart';
 import 'package:dalel_admin/view/widgets/war_widget/add_war_form.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
@@ -19,17 +19,18 @@ class AddWarPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.read(periodsProvider.notifier);
-    final state = ref.watch(periodsProvider);
+    final provider = ref.read(addWarProvider.notifier);
+    final state = ref.watch(addWarProvider);
     final imageProvider = ref.read(getImageProvider.notifier);
-    ref.listen(periodsProvider, (previous, next) {
-      if (next is AddPeriodsError) {
+    ref.listen(addWarProvider, (previous, next) {
+      if (next is AddWarError) {
         customToast(title: next.message, color: Colors.red);
       }
-      if (next is AddPeriodsSuccess) {
+      if (next is AddWarSuccess) {
         customToast(
-            title: "Periods Added Successfully", color: AppColors.primaryColor);
-        ref.invalidate(getPeriodsProvider);
+            title: "War Added Successfully", color: AppColors.primaryColor);
+
+        ref.invalidate(getWarProvider);
         context.router.pop();
       }
     });
@@ -47,7 +48,7 @@ class AddWarPage extends ConsumerWidget {
             SliverToBoxAdapter(child: SizedBox(height: context.height * 0.3)),
             SliverToBoxAdapter(
                 child: CustomButton(
-              child: state is AddPeriodsLoading
+              child: state is AddWarLoading
                   ? CustomCircleIndicator(
                       color: AppColors.offWhite,
                     )
@@ -58,7 +59,9 @@ class AddWarPage extends ConsumerWidget {
                       title: "Please Add Image First", color: Colors.red);
                 } else {
                   provider.imageUrl = imageProvider.imageUrl;
-                  await provider.addHistoricalPeriods();
+                  ref.read(docIdProvider.notifier).state = data.id!;
+                  provider.docId = data.id;
+                  await provider.addWar();
                 }
               },
             )),
