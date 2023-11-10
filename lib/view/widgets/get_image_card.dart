@@ -1,10 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dalel_admin/core/widget/custom_circle_indicator.dart';
+import 'package:dalel_admin/core/widget/custom_dialog.dart';
 import 'package:dalel_admin/core/widget/custom_toast.dart';
 import 'package:dalel_admin/provider/get_image_provider/get_image_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dalel_admin/core/constant/app_colors.dart';
 import 'package:dalel_admin/core/extension/media_query.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class GetImageCard extends ConsumerWidget {
   const GetImageCard({
@@ -26,12 +29,25 @@ class GetImageCard extends ConsumerWidget {
         if (next is GetImageError) {
           customToast(title: next.message, color: Colors.red);
         }
+        if (next is GetImageLoading) {
+          context.router.pop();
+        }
       },
     );
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
       child: InkWell(
-        onTap: onTap,
+        onTap: () {
+          getImage(
+            context,
+            cameraBtn: () {
+              provider.getImage(ImageSource.camera);
+            },
+            galleryBtn: () {
+              provider.getImage(ImageSource.gallery);
+            },
+          );
+        },
         child: Container(
           height: context.height * 0.25,
           decoration: BoxDecoration(

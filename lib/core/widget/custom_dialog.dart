@@ -4,63 +4,64 @@ import 'package:dalel_admin/core/constant/app_text_style.dart';
 import 'package:dalel_admin/core/extension/media_query.dart';
 import 'package:flutter/material.dart';
 
-Future<void> showMyDialog(BuildContext context,
-    {required String header,
-    required String title,
-    required String btnTitle,
-    Widget? child,
-    required void Function()? onPressed}) async {
+Future<void> getImage(BuildContext context,
+    {required void Function()? galleryBtn,
+    required void Function()? cameraBtn}) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
+        backgroundColor: Theme.of(context).canvasColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Text(header),
-        backgroundColor: AppColors.offWhite,
-        content: Text(
-          title,
-          style: AppTextStyle.poppins400style14
-              .copyWith(color: AppColors.blackGrey),
-        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, bottom: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: ElevatedButton(
+            child: SizedBox(
+              height: context.height * 0.2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  ElevatedButton(
+                      onPressed: galleryBtn,
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.brown,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          )),
+                      child: Text(
+                        "Image From Gallery",
+                        style: AppTextStyle.poppins500style16
+                            .copyWith(color: AppColors.offWhite),
+                      )),
+                  ElevatedButton(
+                      onPressed: cameraBtn,
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.brown,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          )),
+                      child: Text(
+                        "Image From Camera",
+                        style: AppTextStyle.poppins500style16
+                            .copyWith(color: AppColors.offWhite),
+                      )),
+                  ElevatedButton(
                       onPressed: () {
                         context.router.pop();
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.offWhite,
+                          backgroundColor: Theme.of(context).canvasColor,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                               side: const BorderSide(color: Colors.grey))),
-                      child: const Text(
-                        "No",
-                        style: AppTextStyle.poppins300style16,
+                      child: Text(
+                        "Cancel",
+                        style: AppTextStyle.poppins500style16,
                       )),
-                ),
-                SizedBox(width: context.width * 0.02),
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: onPressed,
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primaryColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          )),
-                      child: child ??
-                          Text(
-                            btnTitle,
-                            style: AppTextStyle.poppins500style18
-                                .copyWith(color: AppColors.offWhite),
-                          )),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

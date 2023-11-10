@@ -5,13 +5,11 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends StatelessWidget {
   final String labelText;
   final bool maxLine;
-  final void Function(String)? onChanged;
-  final void Function(String)? onFieldSubmitted;
+  final void Function(String?)? onSaved;
   const CustomTextFormField({
     super.key,
     required this.labelText,
-    this.onChanged,
-    this.onFieldSubmitted,
+    this.onSaved,
     this.maxLine = false,
   });
 
@@ -22,12 +20,11 @@ class CustomTextFormField extends StatelessWidget {
       child: TextFormField(
         validator: (value) {
           if (value!.trim().isEmpty) {
-            return "AppStrings.requiredField";
+            return "This Field Is Required";
           }
           return null;
         },
-        onChanged: onChanged,
-        onFieldSubmitted: onFieldSubmitted,
+        onSaved: onSaved,
         cursorColor: AppColors.primaryColor,
         maxLines: maxLine ? null : 1,
         decoration: InputDecoration(

@@ -42,7 +42,7 @@ class GetImageProvider extends StateNotifier<GetImageState> {
     final imageName = basename(imagePath!);
     final imagePlace = storage.ref("Images").child(imageName);
     await imagePlace.putFile(file!);
-    final imageUrl = await imagePlace.getDownloadURL();
-    log(imageUrl);
+    imageUrl = await imagePlace.getDownloadURL();
+    log("$imageUrl");
   }
 }
