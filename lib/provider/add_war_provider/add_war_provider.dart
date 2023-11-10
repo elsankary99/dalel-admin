@@ -5,20 +5,21 @@ import 'package:dalel_admin/data/model/historical_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-part 'periods_state.dart';
+part 'add_war_state.dart';
 
-final getPeriodsProvider = FutureProvider<List<HistoricalModel>>((ref) async {
+final getWarProvider = FutureProvider<List<HistoricalModel>>((ref) async {
   final response =
       await FirebaseFirestore.instance.collection("HistoricalPeriods").get();
   final data = response.docs;
   return data.map((e) => HistoricalModel.fromJson(e.id, e.data())).toList();
 });
 //!==============================================
-final periodsProvider = StateNotifierProvider<PeriodsProvider, PeriodsState>(
-    (ref) => PeriodsProvider());
 
-class PeriodsProvider extends StateNotifier<PeriodsState> {
-  PeriodsProvider() : super(PeriodsInitial());
+final addWarProvider = StateNotifierProvider<AddWarProvider, AddWarState>(
+    (ref) => AddWarProvider());
+
+class AddWarProvider extends StateNotifier<AddWarState> {
+  AddWarProvider() : super(AddWarInitial());
   String? imageUrl;
   String? name;
   String? description;
@@ -26,7 +27,7 @@ class PeriodsProvider extends StateNotifier<PeriodsState> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   Future<void> addHistoricalPeriods() async {
     try {
-      state = AddPeriodsLoading();
+      state = AddWarLoading();
       if (formKey.currentState!.validate() && imageUrl != null) {
         formKey.currentState!.save();
 
@@ -40,10 +41,10 @@ class PeriodsProvider extends StateNotifier<PeriodsState> {
             "description": description,
           },
         );
-        state = AddPeriodsSuccess();
+        state = AddWarSuccess();
       }
     } catch (e) {
-      state = AddPeriodsError(e.toString());
+      state = AddWarError(e.toString());
     }
   }
 }

@@ -33,6 +33,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AddSouvenirsPage(),
       );
     },
+    AddWarRoute.name: (routeData) {
+      final args = routeData.argsAs<AddWarRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: AddWarPage(
+          args.data,
+          key: args.key,
+        ),
+      );
+    },
     HistoricalCharactersRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -61,6 +71,16 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const SplashPage(),
+      );
+    },
+    WarRoute.name: (routeData) {
+      final args = routeData.argsAs<WarRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WarPage(
+          args.data,
+          key: args.key,
+        ),
       );
     },
   };
@@ -106,6 +126,43 @@ class AddSouvenirsRoute extends PageRouteInfo<void> {
   static const String name = 'AddSouvenirsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AddWarPage]
+class AddWarRoute extends PageRouteInfo<AddWarRouteArgs> {
+  AddWarRoute({
+    required HistoricalModel data,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          AddWarRoute.name,
+          args: AddWarRouteArgs(
+            data: data,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'AddWarRoute';
+
+  static const PageInfo<AddWarRouteArgs> page = PageInfo<AddWarRouteArgs>(name);
+}
+
+class AddWarRouteArgs {
+  const AddWarRouteArgs({
+    required this.data,
+    this.key,
+  });
+
+  final HistoricalModel data;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'AddWarRouteArgs{data: $data, key: $key}';
+  }
 }
 
 /// generated route for
@@ -176,4 +233,41 @@ class SplashRoute extends PageRouteInfo<void> {
   static const String name = 'SplashRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [WarPage]
+class WarRoute extends PageRouteInfo<WarRouteArgs> {
+  WarRoute({
+    required HistoricalModel data,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          WarRoute.name,
+          args: WarRouteArgs(
+            data: data,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'WarRoute';
+
+  static const PageInfo<WarRouteArgs> page = PageInfo<WarRouteArgs>(name);
+}
+
+class WarRouteArgs {
+  const WarRouteArgs({
+    required this.data,
+    this.key,
+  });
+
+  final HistoricalModel data;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'WarRouteArgs{data: $data, key: $key}';
+  }
 }

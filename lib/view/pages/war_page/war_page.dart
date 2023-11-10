@@ -1,5 +1,6 @@
 import 'package:dalel_admin/core/constant/app_text_style.dart';
 import 'package:dalel_admin/core/widget/custom_circle_indicator.dart';
+import 'package:dalel_admin/data/model/historical_model.dart';
 import 'package:dalel_admin/provider/periods_provider/periods_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
@@ -9,18 +10,20 @@ import 'package:dalel_admin/view/widgets/card_with_image.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
-class HistoricalPeriodsPage extends ConsumerWidget {
-  const HistoricalPeriodsPage({super.key});
+class WarPage extends ConsumerWidget {
+  final HistoricalModel data;
+
+  const WarPage(this.data, {super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Historical Periods"),
+        title: const Text("War Page"),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.router.push(const AddPeriodsRoute());
+          context.router.push(AddWarRoute(data: data));
         },
         child: Icon(
           Icons.add,
@@ -34,7 +37,7 @@ class HistoricalPeriodsPage extends ConsumerWidget {
                 itemCount: data.length,
                 itemBuilder: (context, index) => CardWithImage(
                     onTap: () {
-                      context.router.push(WarRoute(data: data[index]));
+                      context.router.push(AddWarRoute(data: data[index]));
                     },
                     description: data[index].description!,
                     imageUrl: data[index].imageUrl!,

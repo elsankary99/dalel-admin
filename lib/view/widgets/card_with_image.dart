@@ -1,6 +1,7 @@
 import 'package:dalel_admin/core/constant/app_colors.dart';
 import 'package:dalel_admin/core/constant/app_text_style.dart';
 import 'package:dalel_admin/core/extension/media_query.dart';
+
 import 'package:flutter/material.dart';
 
 class CardWithImage extends StatelessWidget {
@@ -9,14 +10,16 @@ class CardWithImage extends StatelessWidget {
     required this.imageUrl,
     required this.name,
     required this.description,
+    required this.onTap,
   });
+  final void Function()? onTap;
   final String imageUrl;
   final String name;
   final String description;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         height: context.height * 0.15,
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
