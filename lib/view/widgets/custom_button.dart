@@ -6,16 +6,18 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     this.onPressed,
+    this.child,
   });
+  final Widget? child;
   final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
         height: context.height * 0.07,
         child: ElevatedButton(
-          onPressed: onPressed,
+          onPressed: child == null ? onPressed : () {},
           style: ElevatedButton.styleFrom(backgroundColor: AppColors.brown),
-          child: const Text("Add"),
+          child: child ?? const Text("Add"),
         ));
   }
 }

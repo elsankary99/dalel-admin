@@ -1,3 +1,6 @@
+import 'package:dalel_admin/core/constant/app_colors.dart';
+import 'package:dalel_admin/core/widget/custom_circle_indicator.dart';
+import 'package:dalel_admin/core/widget/custom_toast.dart';
 import 'package:dalel_admin/provider/get_image_provider/get_image_provider.dart';
 import 'package:dalel_admin/provider/periods_provider/periods_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,8 +18,18 @@ class AddPeriodsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.read(periodsProvider.notifier);
+    final state = ref.watch(periodsProvider);
     final imageProvider = ref.read(getImageProvider.notifier);
-    ref.watch(getImageProvider);
+    ref.listen(periodsProvider, (previous, next) {
+      if (next is AddPeriodsError) {
+        customToast(title: next.message, color: Colors.red);
+      }
+      if (next is AddPeriodsSuccess) {
+        customToast(
+            title: "Periods Added Successfully", color: AppColors.primaryColor);
+        context.router.pop();
+      }
+    });
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Periods"),
@@ -29,10 +42,21 @@ class AddPeriodsPage extends ConsumerWidget {
             const SliverToBoxAdapter(child: GetImageCard()),
             const SliverToBoxAdapter(child: AddPeriodsForm()),
             SliverToBoxAdapter(child: SizedBox(height: context.height * 0.3)),
-            SliverToBoxAdapter(child: CustomButton(
+            SliverToBoxAdapter(
+                child: CustomButton(
+              child: state is AddPeriodsLoading
+                  ? CustomCircleIndicator(
+                      color: AppColors.offWhite,
+                    )
+                  : null,
               onPressed: () async {
-                provider.imageUrl = imageProvider.imageUrl;
-                await provider.addHistoricalPeriods();
+                if (imageProvider.imageUrl == null) {
+                  customToast(
+                      title: "Please Add Image First", color: Colors.red);
+                } else {
+                  provider.imageUrl = imageProvider.imageUrl;
+                  await provider.addHistoricalPeriods();
+                }
               },
             )),
             SliverToBoxAdapter(child: SizedBox(height: context.height * 0.03)),
