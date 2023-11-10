@@ -37,9 +37,6 @@ class WarPage extends ConsumerWidget {
                       physics: const BouncingScrollPhysics(),
                       itemCount: data.length,
                       itemBuilder: (context, index) => CardWithImage(
-                          onTap: () {
-                            context.router.push(AddWarRoute(data: data[index]));
-                          },
                           description: data[index].description!,
                           imageUrl: data[index].imageUrl!,
                           name: data[index].name!),

@@ -1,5 +1,6 @@
 import 'package:dalel_admin/core/constant/app_text_style.dart';
 import 'package:dalel_admin/core/widget/custom_circle_indicator.dart';
+import 'package:dalel_admin/provider/add_war_provider/add_war_provider.dart';
 import 'package:dalel_admin/provider/periods_provider/periods_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
@@ -34,6 +35,8 @@ class HistoricalPeriodsPage extends ConsumerWidget {
                 itemCount: data.length,
                 itemBuilder: (context, index) => CardWithImage(
                     onTap: () {
+                      ref.read(docIdProvider.notifier).state = data[index].id!;
+
                       context.router.push(WarRoute(data: data[index]));
                     },
                     description: data[index].description!,

@@ -8,7 +8,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 part 'add_war_state.dart';
 
 final docIdProvider = StateProvider<String>((ref) => "");
-final getWarProvider = FutureProvider<List<HistoricalModel>>((ref) async {
+final getWarProvider =
+    FutureProvider.autoDispose<List<HistoricalModel>>((ref) async {
   final docId = ref.watch(docIdProvider);
   final response = await FirebaseFirestore.instance
       .collection("HistoricalPeriods")

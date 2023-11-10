@@ -10,7 +10,7 @@ class CardWithImage extends StatelessWidget {
     required this.imageUrl,
     required this.name,
     required this.description,
-    required this.onTap,
+    this.onTap,
   });
   final void Function()? onTap;
   final String imageUrl;

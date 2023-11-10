@@ -60,6 +60,7 @@ class AddWarPage extends ConsumerWidget {
                 } else {
                   provider.imageUrl = imageProvider.imageUrl;
                   ref.read(docIdProvider.notifier).state = data.id!;
+
                   provider.docId = data.id;
                   await provider.addWar();
                 }
