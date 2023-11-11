@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dalel_admin/core/constant/app_Strings.dart';
 import 'package:dalel_admin/data/model/historical_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,6 +24,7 @@ class PeriodsProvider extends StateNotifier<PeriodsState> {
   String? imageUrl;
   String? name;
   String? description;
+  String? collection;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   Future<void> addHistoricalPeriods() async {
@@ -32,11 +32,11 @@ class PeriodsProvider extends StateNotifier<PeriodsState> {
       state = AddPeriodsLoading();
       if (formKey.currentState!.validate() && imageUrl != null) {
         formKey.currentState!.save();
-
-        log(imageUrl!);
-        log(name!);
-        log(description!);
-        await firestore.collection(AppStrings.periodsCollection).add(
+        log("$imageUrl");
+        log("$name ");
+        log("$description");
+        log("$collection");
+        await firestore.collection(collection!).add(
           {
             "image_url": imageUrl,
             "name": name,

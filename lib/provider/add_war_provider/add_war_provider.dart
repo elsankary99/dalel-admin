@@ -9,11 +9,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 part 'add_war_state.dart';
 
 final docIdProvider = StateProvider<String>((ref) => "");
+final warCollectionProvider = StateProvider<String>((ref) => "");
 final getWarProvider =
     FutureProvider.autoDispose<List<HistoricalModel>>((ref) async {
   final docId = ref.watch(docIdProvider);
+  final collection = ref.watch(warCollectionProvider);
   final response = await FirebaseFirestore.instance
-      .collection(AppStrings.periodsCollection)
+      .collection(collection)
       .doc(docId)
       .collection(AppStrings.warCollection)
       .get();
@@ -31,6 +33,7 @@ class AddWarProvider extends StateNotifier<AddWarState> {
   String? name;
   String? description;
   String? docId;
+  String? warCollection;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   Future<void> addWar() async {
@@ -39,12 +42,12 @@ class AddWarProvider extends StateNotifier<AddWarState> {
       if (formKey.currentState!.validate() && imageUrl != null) {
         formKey.currentState!.save();
 
-        log(imageUrl!);
-        log(name!);
-        log(description!);
-        log(docId!);
+        log("$imageUrl");
+        log("$name ");
+        log("$description");
+        log("$warCollection");
         await firestore
-            .collection(AppStrings.periodsCollection)
+            .collection(warCollection!)
             .doc(docId)
             .collection(AppStrings.warCollection)
             .add(

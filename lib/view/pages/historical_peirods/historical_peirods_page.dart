@@ -1,3 +1,4 @@
+import 'package:dalel_admin/core/constant/app_Strings.dart';
 import 'package:dalel_admin/core/constant/app_text_style.dart';
 import 'package:dalel_admin/core/widget/custom_circle_indicator.dart';
 import 'package:dalel_admin/provider/add_war_provider/add_war_provider.dart';
@@ -21,6 +22,8 @@ class HistoricalPeriodsPage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          ref.read(periodsProvider.notifier).collection =
+              AppStrings.periodsCollection;
           context.router.push(const AddPeriodsRoute());
         },
         child: Icon(

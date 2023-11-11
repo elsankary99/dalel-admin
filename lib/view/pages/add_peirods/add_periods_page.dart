@@ -28,6 +28,8 @@ class AddPeriodsPage extends ConsumerWidget {
         customToast(
             title: "Periods Added Successfully", color: AppColors.primaryColor);
         ref.invalidate(getPeriodsProvider);
+        imageProvider.file = null;
+
         context.router.pop();
       }
     });
