@@ -1,15 +1,18 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dalel_admin/core/constant/app_Strings.dart';
 import 'package:dalel_admin/data/model/historical_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 part 'periods_state.dart';
 
+final collectionProvider = StateProvider<String>((ref) => "");
 final getPeriodsProvider = FutureProvider<List<HistoricalModel>>((ref) async {
+  final collection = ref.watch(collectionProvider);
   final response =
-      await FirebaseFirestore.instance.collection("HistoricalPeriods").get();
+      await FirebaseFirestore.instance.collection(collection).get();
   final data = response.docs;
   return data.map((e) => HistoricalModel.fromJson(e.id, e.data())).toList();
 });
@@ -33,7 +36,7 @@ class PeriodsProvider extends StateNotifier<PeriodsState> {
         log(imageUrl!);
         log(name!);
         log(description!);
-        await firestore.collection("HistoricalPeriods").add(
+        await firestore.collection(AppStrings.periodsCollection).add(
           {
             "image_url": imageUrl,
             "name": name,

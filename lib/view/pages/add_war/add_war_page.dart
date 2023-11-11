@@ -59,8 +59,6 @@ class AddWarPage extends ConsumerWidget {
                       title: "Please Add Image First", color: Colors.red);
                 } else {
                   provider.imageUrl = imageProvider.imageUrl;
-                  ref.read(docIdProvider.notifier).state = data.id!;
-
                   provider.docId = data.id;
                   await provider.addWar();
                 }

@@ -1,14 +1,17 @@
+import 'package:dalel_admin/core/constant/app_Strings.dart';
+import 'package:dalel_admin/provider/periods_provider/periods_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:dalel_admin/core/router/app_router.dart';
 import 'package:dalel_admin/view/widgets/historical_card.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(title: const Text("Home Admin")),
       body: Padding(
@@ -18,6 +21,8 @@ class HomePage extends StatelessWidget {
           SliverToBoxAdapter(
             child: HistoricalCard(
                 onTap: () {
+                  ref.read(collectionProvider.notifier).state =
+                      AppStrings.charactersCollection;
                   context.router.push(const HistoricalCharactersRoute());
                 },
                 cardName: "Historical Characters",
@@ -28,6 +33,8 @@ class HomePage extends StatelessWidget {
             child: HistoricalCard(
                 cardName: "Historical Periods",
                 onTap: () {
+                  ref.read(collectionProvider.notifier).state =
+                      AppStrings.periodsCollection;
                   context.router.push(const HistoricalPeriodsRoute());
                 },
                 title: "You Can Add More Periods",
@@ -37,6 +44,8 @@ class HomePage extends StatelessWidget {
             child: HistoricalCard(
                 cardName: "Historical Souvenirs",
                 onTap: () {
+                  ref.read(collectionProvider.notifier).state =
+                      AppStrings.souvenirsCollection;
                   context.router.push(const HistoricalSouvenirsRoute());
                 },
                 title: "You Can Add More Souvenirs",

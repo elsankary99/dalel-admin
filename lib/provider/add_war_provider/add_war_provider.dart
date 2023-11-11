@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dalel_admin/core/constant/app_Strings.dart';
 import 'package:dalel_admin/data/model/historical_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,9 +13,9 @@ final getWarProvider =
     FutureProvider.autoDispose<List<HistoricalModel>>((ref) async {
   final docId = ref.watch(docIdProvider);
   final response = await FirebaseFirestore.instance
-      .collection("HistoricalPeriods")
+      .collection(AppStrings.periodsCollection)
       .doc(docId)
-      .collection("War")
+      .collection(AppStrings.warCollection)
       .get();
   final data = response.docs;
   return data.map((e) => HistoricalModel.fromJson(e.id, e.data())).toList();
@@ -43,9 +44,9 @@ class AddWarProvider extends StateNotifier<AddWarState> {
         log(description!);
         log(docId!);
         await firestore
-            .collection("HistoricalPeriods")
+            .collection(AppStrings.periodsCollection)
             .doc(docId)
-            .collection("War")
+            .collection(AppStrings.warCollection)
             .add(
           {
             "image_url": imageUrl,
