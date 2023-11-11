@@ -31,6 +31,7 @@ class AddWarPage extends ConsumerWidget {
             title: "War Added Successfully", color: AppColors.primaryColor);
 
         ref.invalidate(getWarProvider);
+        imageProvider.file = null;
         context.router.pop();
       }
     });

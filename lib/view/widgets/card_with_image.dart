@@ -34,23 +34,25 @@ class CardWithImage extends StatelessWidget {
             imageUrl,
             width: context.width * 0.3,
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                name,
-                maxLines: 1,
-                style: AppTextStyle.poppins500style16
-                    .copyWith(color: AppColors.offWhite),
-              ),
-              const SizedBox(height: 15),
-              Text(
-                description,
-                maxLines: 1,
-                style: AppTextStyle.poppins500style16
-                    .copyWith(color: AppColors.offWhite),
-              ),
-            ],
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  name,
+                  maxLines: 1,
+                  style: AppTextStyle.poppins500style16
+                      .copyWith(color: AppColors.offWhite),
+                ),
+                const SizedBox(height: 15),
+                Text(
+                  description,
+                  maxLines: 1,
+                  style: AppTextStyle.poppins500style16
+                      .copyWith(color: AppColors.offWhite),
+                ),
+              ],
+            ),
           ),
           Icon(
             Icons.arrow_forward_rounded,

@@ -38,6 +38,10 @@ class HistoricalSouvenirsPage extends ConsumerWidget {
                 itemCount: data.length,
                 itemBuilder: (context, index) => CardWithImage(
                     onTap: () {
+                      ref.read(addWarProvider.notifier).warCollection =
+                          AppStrings.souvenirsCollection;
+                      ref.read(warCollectionProvider.notifier).state =
+                          AppStrings.souvenirsCollection;
                       ref.read(docIdProvider.notifier).state = data[index].id!;
 
                       context.router.push(WarRoute(data: data[index]));
