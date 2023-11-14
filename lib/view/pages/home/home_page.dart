@@ -51,6 +51,28 @@ class HomePage extends ConsumerWidget {
                 title: "You Can Add More Souvenirs",
                 icon: Icons.account_balance_sharp),
           ),
+          SliverToBoxAdapter(
+            child: HistoricalCard(
+                cardName: "History Books",
+                onTap: () {
+                  ref.read(collectionProvider.notifier).state =
+                      AppStrings.souvenirsCollection;
+                  context.router.push(const HistoricalSouvenirsRoute());
+                },
+                title: "You Can Add More Books",
+                icon: Icons.menu_book_sharp),
+          ),
+          SliverToBoxAdapter(
+            child: HistoricalCard(
+                cardName: "Historical Souvenir",
+                onTap: () {
+                  ref.read(collectionProvider.notifier).state =
+                      AppStrings.souvenirsCollection;
+                  context.router.push(const HistoricalSouvenirsRoute());
+                },
+                title: "You Can Add More",
+                icon: Icons.menu_book_sharp),
+          ),
         ]),
       ),
     );
