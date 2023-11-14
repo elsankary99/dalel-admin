@@ -53,22 +53,18 @@ class HomePage extends ConsumerWidget {
           ),
           SliverToBoxAdapter(
             child: HistoricalCard(
-                cardName: "History Books",
+                cardName: "Bazar Books",
                 onTap: () {
-                  ref.read(collectionProvider.notifier).state =
-                      AppStrings.souvenirsCollection;
-                  context.router.push(const HistoricalSouvenirsRoute());
+                  context.router.push(BazarBooksRoute());
                 },
                 title: "You Can Add More Books",
                 icon: Icons.menu_book_sharp),
           ),
           SliverToBoxAdapter(
             child: HistoricalCard(
-                cardName: "Historical Souvenir",
+                cardName: "Bazar Souvenir",
                 onTap: () {
-                  ref.read(collectionProvider.notifier).state =
-                      AppStrings.souvenirsCollection;
-                  context.router.push(const HistoricalSouvenirsRoute());
+                  context.router.push(BazarSouvenirRoute());
                 },
                 title: "You Can Add More",
                 icon: Icons.menu_book_sharp),

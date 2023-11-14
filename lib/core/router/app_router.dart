@@ -1,7 +1,11 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:dalel_admin/data/model/historical_model.dart';
+import 'package:dalel_admin/view/pages/add_books/add_books_page.dart';
+import 'package:dalel_admin/view/pages/add_books/bazar_books_page.dart';
 import 'package:dalel_admin/view/pages/add_peirods/add_periods_page.dart';
+import 'package:dalel_admin/view/pages/add_souvenirs/add_souvenirs_page.dart';
+import 'package:dalel_admin/view/pages/add_souvenirs/bazar_souvenirs_page.dart';
 import 'package:dalel_admin/view/pages/add_war/add_war_page.dart';
 import 'package:dalel_admin/view/pages/historical_characters/historical_characters_page.dart';
 import 'package:dalel_admin/view/pages/historical_peirods/historical_peirods_page.dart';
@@ -28,6 +32,11 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: WarRoute.page),
         //? Add
         AutoRoute(page: AddPeriodsRoute.page),
-        AutoRoute(page: AddWarRoute.page)
+        AutoRoute(page: AddWarRoute.page),
+//? Bazar
+        AutoRoute(page: BazarBooksRoute.page),
+        AutoRoute(page: BazarSouvenirRoute.page),
+        AutoRoute(page: AddBazarBooksRoute.page),
+        AutoRoute(page: AddBazarSouvenirRoute.page),
       ];
 }

@@ -15,6 +15,18 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    AddBazarBooksRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AddBazarBooksPage(),
+      );
+    },
+    AddBazarSouvenirRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AddBazarSouvenirPage(),
+      );
+    },
     AddPeriodsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -29,6 +41,18 @@ abstract class _$AppRouter extends RootStackRouter {
           args.data,
           key: args.key,
         ),
+      );
+    },
+    BazarBooksRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BazarBooksPage(),
+      );
+    },
+    BazarSouvenirRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BazarSouvenirPage(),
       );
     },
     HistoricalCharactersRoute.name: (routeData) {
@@ -72,6 +96,34 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [AddBazarBooksPage]
+class AddBazarBooksRoute extends PageRouteInfo<void> {
+  const AddBazarBooksRoute({List<PageRouteInfo>? children})
+      : super(
+          AddBazarBooksRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AddBazarBooksRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AddBazarSouvenirPage]
+class AddBazarSouvenirRoute extends PageRouteInfo<void> {
+  const AddBazarSouvenirRoute({List<PageRouteInfo>? children})
+      : super(
+          AddBazarSouvenirRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AddBazarSouvenirRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -123,6 +175,34 @@ class AddWarRouteArgs {
   String toString() {
     return 'AddWarRouteArgs{data: $data, key: $key}';
   }
+}
+
+/// generated route for
+/// [BazarBooksPage]
+class BazarBooksRoute extends PageRouteInfo<void> {
+  const BazarBooksRoute({List<PageRouteInfo>? children})
+      : super(
+          BazarBooksRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BazarBooksRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [BazarSouvenirPage]
+class BazarSouvenirRoute extends PageRouteInfo<void> {
+  const BazarSouvenirRoute({List<PageRouteInfo>? children})
+      : super(
+          BazarSouvenirRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BazarSouvenirRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
